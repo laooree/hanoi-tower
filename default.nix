@@ -1,19 +1,17 @@
-let
-  pkgs = import <nixpkgs> {};
-in
+{ pkgs ? import <nixpkgs> {} }:
 
-  pkgs.stdenv.mkDerivation {
-    pname   = "hanoi";
-    version = "0.0.1";
+pkgs.stdenv.mkDerivation {
+  pname   = "hanoi";
+  version = "0.0.1";
 
-    src = ./.;
+  src = ./.;
 
-    buildPhase = ''
-      gcc main.c
-    '';
+  buildPhase = ''
+    gcc main.c
+  '';
 
-    installPhase = ''
-      mkdir -p $out/bin
+  installPhase = ''
+    mkdir -p $out/bin
       cp a.out $out/bin/hanoi
-    '';
-  }
+  '';
+}
