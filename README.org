@@ -1,0 +1,7 @@
+#+title: Hanoi Tower
+#+author: laooree
+#+description: Simple C implementation of a self-solving Hanoi Tower problem, with TUI animation.
+
+This is a simple implementation of a self-solving Hanoi Tower game. As I'm improving my C skills, this was a funny exercise on the implementation of stacks.
+
+The implemented solution method is the classic recursive one.
