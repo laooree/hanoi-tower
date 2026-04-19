@@ -244,16 +244,18 @@ struct stack *stack_c;
 
 /* Solve the hanoi tower by moving n disks from source to target, *
  * using aux as an auxiliary staack.                             */
-void solve(unsigned long n, struct stack *source, struct stack *target, struct stack *aux) {
+void solve(unsigned long n, struct stack *source, struct stack *target, struct stack *aux, int recursion_depth) {
     if (n == 0) {
         return;
     } else {
-        solve(n-1, source, aux, target);
+        solve(n-1, source, aux, target, recursion_depth+1);
         move(source, target);
         printf("\x1b[3J\x1b[H\x1b[2J"); // clear screen
-        usleep((int)1000000/FPS);
         print_game(stack_a,stack_b,stack_c);
-        solve(n-1, aux, target, source);
+        putchar('\n');
+        printf("Current recursion depth: %02d\n", recursion_depth);
+        usleep((int)1000000/FPS);
+        solve(n-1, aux, target, source, recursion_depth+1);
     }
     return;
 }
@@ -261,13 +263,15 @@ void solve(unsigned long n, struct stack *source, struct stack *target, struct s
 
 int main(void) {
 
+
     stack_a = init_stack();
     stack_b = init_stack();
     stack_c = init_stack();
 
     fill_empty_stack(stack_a, NDISKS);
 
-    solve(NDISKS, stack_a, stack_b, stack_c);
+    print_game(stack_a,stack_b,stack_c);
+    solve(NDISKS, stack_a, stack_b, stack_c, 1);
 
     return 0;
 
