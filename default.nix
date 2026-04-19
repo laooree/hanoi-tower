@@ -1,6 +1,6 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ stdenv }:
 
-pkgs.stdenv.mkDerivation {
+stdenv.mkDerivation {
   pname   = "hanoi";
   version = "0.0.1";
 
@@ -12,6 +12,6 @@ pkgs.stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-      cp a.out $out/bin/hanoi
+    cp a.out $out/bin/hanoi
   '';
 }
